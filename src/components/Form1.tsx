@@ -8,8 +8,10 @@ import { AppDispatch, fetchEmployees } from '../store';
 import { useDispatch } from 'react-redux';
 
 const positions: string[] = ['Директор', 'Менеджер', 'Програміст', 'Дизайнер'];
+const serverUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Form1: React.FC = () => {
+  console.log(import.meta.env);
   const dispatch = useDispatch<AppDispatch>();
   const [formData, setFormData] = useState({
     lastName: '',
@@ -31,10 +33,7 @@ const Form1: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        'http://localhost:3001/employees',
-        formData
-      );
+      const response = await axios.post(`${serverUrl}/employees`, formData);
       dispatch(fetchEmployees());
       console.log('Employee saved:', response.data);
     } catch (error) {

@@ -12,6 +12,8 @@ import {
   RootState,
 } from '../store';
 
+const serverUrl = import.meta.env.VITE_BACKEND_URL;
+
 const Form2: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const employee = useSelector(
@@ -23,7 +25,7 @@ const Form2: React.FC = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3001/employees/${employee.id}`);
+      await axios.delete(`${serverUrl}/employees/${employee.id}`);
       dispatch(deleteEmployee(employee.id));
       dispatch(fetchEmployees());
       dispatch(clearSelectedEmployee());
