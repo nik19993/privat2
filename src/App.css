@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+.highlight {
+  background-color: yellow;
+}
